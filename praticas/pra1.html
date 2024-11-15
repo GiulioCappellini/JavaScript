@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratica 1</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-size: 1em;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            height: 100vh;
+            background-color: rgb(24, 24, 24);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.6em;
+        }
+        div {
+            width: 40vw;
+            height: 40vh;
+            background-color: white;
+            color: black;
+            border-radius: 20px;
+            text-align: center;
+            line-height: 40vh;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interaja com o bloco!</h1>
+    <div>
+    </div>
+    <script>
+        var div = document.querySelector("div");
+        div.addEventListener("click", clicar);
+        div.addEventListener("mouseenter", mouseentra);
+        div.addEventListener("mouseout", mousesai);
+        div.addEventListener("mousedown", mouseabaixa);
+        div.addEventListener("mouseup", mousesobe);
+        function clicar() {
+            div.innerText = "Clicou!"
+        }
+        function mouseentra() {
+            div.innerText = "Mouse entrou!"
+        }
+        function mousesai() {
+            div.innerText = "Mouse saio!"
+        }
+        function mouseabaixa() {
+            div.innerText = "Mouse precionado!"
+        }
+        function mousesobe() {
+            div.style.backgroundColor = "red"
+        }
+    </script>
+</body>
+</html>
