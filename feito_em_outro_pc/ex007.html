@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculo</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+            font-size: 1em;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            height: 100vh;
+            background-color: rgb(29, 29, 29);
+            color: white;
+            position: relative;
+        }
+        h1 {
+            font-size: 1.9em;
+            color: white;
+            position: absolute;
+            left: 50%;
+            top: 8%;
+            transform: translate(-50%, -50%);
+        }
+        #container::before {
+            content: "";
+            position: absolute;
+            background-color: white;
+            width: 60vw;
+            height: 91px;
+            z-index: -1;
+            filter: blur(5px);
+        }
+        div#container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 60vw;
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            transform: translate(-50%, -50%);
+            color: black;
+        }
+        div#container_valores {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        div#container_valores input {
+            width: 40px;
+        }
+        input#ibotao {
+            width: 120px;
+            appearance: none;
+            background-color: rgb(6, 6, 6);
+            color: white;
+            border: none;
+            border-radius: 20px;
+        }
+        #res {
+            width: 60vw;
+            height: 20px;
+            background-color: white;
+            color: black;
+            position: absolute;
+            top: 120%;
+            text-align: center;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora:</h1>
+    <div id="container">
+        <div id="operador">
+            <label for="iadicao">Adição</label>
+            <input type="radio" name="operador" id="iadicao" checked value="+">
+            <label for="isubtracao">Subtração</label>
+            <input type="radio" name="operador" id="isubtracao" value="-">
+            <label for="imultiplicacao">Multiplicação</label>
+            <input type="radio" name="operador" id="imultiplicacao" value="*">
+            <label for="idivizao">Divizão</label>
+            <input type="radio" name="operador" id="idivizao" value="/">
+        </div>
+
+        <div id="container_valores">
+            <label for="in1">Primeiro valor: </label>
+            <input type="number" name="valor" id="in1" step="0.1" required>
+            
+            <label for="in2">Segundo valor: </label>
+            <input type="number" name="valor" id="in2" step="0.1" required>
+        </div>
+        <input type="button" value="Calcular" id="ibotao" onclick="calcular()">
+        <div id="res">Resultado</div>
+    </div>
+    <script>
+        function calcular() {
+            const radios = document.body.querySelectorAll("#operador input[type='radio']")
+            let op = null
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    op = radio.value
+                }
+            })
+            let n1 = document.body.querySelector("#in1").value;
+            let n2 = document.body.querySelector("#in2").value;
+            const operacao = {
+                "+": (a, b) => ({res: a + b, txt: "soma"}),
+                "-": (a, b) => ({res: a - b, txt: "subtração"}),
+                "*": (a, b) => ({res: a * b, txt: "multiplicação"}),
+                "/": (a, b) => ({res: a / b, txt: "divizão"}),
+            };
+            let {res, txt} = operacao[op](Number(n1), Number(n2))
+            document.body.querySelector("#res").innerText = `O Resultado da ${txt} entre ${n1} e ${n2} é ${res}`;
+        }
+    </script>
+</body>
+</html>
