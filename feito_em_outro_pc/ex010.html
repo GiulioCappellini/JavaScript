@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de multas</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            font-size: 1em;
+            font-family: Arial, Helvetica, sans-serif;
+            appearance: none;
+            text-decoration: none;
+        }
+        body {
+            height: 100vh;
+            background-color: rgb(134, 60, 203);
+        }
+        h1 {
+            color: white;
+            font-size: 2.3em;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-self: center;
+            width: 250px;
+        }
+        form * {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quantos R$ em multas você deve pagar?</h1>
+    <form action="#">
+        <input type="text" name="name" id="nome" placeholder="Nome completo" autocomplete="name" required>
+        <input type="number" name="number" id="velocidade" placeholder="velocidade" required>
+        <input type="month" name="month" id="mes">
+        <input type="button" value="Descobrir" onclick="multar()">
+    </form>
+    <script>
+        function multar() {
+            const vel = Number(document.body.querySelector("#velocidade").value)
+            const nome = document.body.querySelector("#nome").value
+            const data = document.body.querySelector("#mes").value
+            let sepdata = data.split("-")
+            let me = sepdata[1]
+            const meses = {
+                "01": {nome: "Janeiro", mult: 1.2},
+                "02": {nome: "Fevereiro", mult: 1.2},
+                "03": {nome: "Março", mult: 1.2},
+                "04": {nome: "Abril", mult: 1.8},
+                "05": {nome: "Maio", mult: 1.8},
+                "06": {nome: "Junho", mult: 1.8},
+                "07": {nome: "Julho", mult: 2.1},
+                "08": {nome: "Agosto", mult: 2.1},
+                "09": {nome: "Setembro", mult: 2.1},
+                "10": {nome: "Outrubro", mult: 2.8},
+                "11": {nome: "Novembro", mult: 2.8},
+                "12": {nome: "Dezembro", mult: 2.8},
+            };
+            let mesinfo = meses[me]
+            let mes = mesinfo.nome
+            let numul = mesinfo.mult
+            console.log(`${nome} você foi multado por estar a ${vel}Km/H no mês de ${mes}. Sua multa é de ${vamulta}`)
+        }
+    </script>
+</body>
+</html>
