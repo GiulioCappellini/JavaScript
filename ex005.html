@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seletores com o DOM</title>
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 100vh;
+            background-color: rgb(28, 28, 28);
+            color: white;
+            font-size: 1.7em;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+<body>
+    <div>exemplo1</div>
+    <div id="div2">exemplo2</div>
+    <div class="div3">exemplo3</div>
+    <div name="div4">exemplo4</div>
+    <script>
+        /*
+        document.getElementsByTagName("div")[0].style.backgroundColor = "red";
+        document.getElementById("div2").style.backgroundColor = "white";
+        document.getElementById("div2").style.color = "black";
+        document.getElementsByClassName("div3")[0].style.backgroundColor = "green";
+        document.getElementsByName("div4")[0].style.backgroundColor = "pink";
+        */
+
+        document.getElementsByTagName("div")[0].style.backgroundColor = "red";
+        // Para selecionar um elemento pela tag é bom utilizar o getElements
+        document.querySelector("#div2").style.backgroundColor = "white";
+        document.querySelector("#div2").style.color = "black";
+        document.querySelector(".div3").style.backgroundColor = "green";
+        document.getElementsByName("div4")[0].style.backgroundColor = "pink";
+        // Para selecionar um elemento com name é bom utilizar o getElements
+    </script>
+</body>
+</html>
