@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/pratica2.css" media="all">
+    <title>Pratica 2</title>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Verificador de idade</h1>
+        </header>
+        <form action="#" onsubmit="verificar(event)">
+            <section id="sectionyear">
+                <label for="iyear">Ano de nascimento: </label>
+                <input type="number" name="year" id="iyear" required>
+            </section>
+            <section id="sectionsex">
+                Sexo:
+                <label for="isexfemale">Feminino </label>
+                <input type="radio" name="sex" id="isexfemale" value="Mulher" checked>
+                <label for="isexmale">Masculino</label>
+                <input type="radio" name="sex" id="isexmale" value="Homem">
+            </section>
+            <input type="submit" value="Verificar" id="submit">
+            <div id="result">Preencha os campos para ver seu resultado!</div>
+        </form>
+        <footer>Pratica com interação</footer>
+    </main>
+    <script src="scripts/pratics2.js"></script>
+</body>
+</html>
