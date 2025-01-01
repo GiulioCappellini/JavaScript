@@ -4,32 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos/pratica3 jogos.css">
+    <link rel="stylesheet" href="estilos/animacao-input.css">
     <title>Burraco</title>
 </head>
-<body>
+<body class="loading">
     <h1>
-        Calcular Pontos
+        Criando partida
     </h1>
     <main>
         <section>
-            <form action="">
-                <label for="i4jogadores">4</label>
-                <input type="radio" name="numjogadores" id="i4jogadores">
-                <label for="i3jogadores">3</label>
-                <input type="radio" name="numjogadores" id="i3jogadores">
-                <label for="i2jogadores">2</label>
-                <input type="radio" name="numjogadores" id="i2jogadores">
-                <fieldset id="nome-jogadores">
-                    <legend>Nome dos jogadores</legend>
-                    <input type="text" name="jogadores" id="jogador1">
-                    <input type="text" name="jogadores" id="jogador2">
-                    <input type="text" name="jogadores" id="jogador3">
-                    <input type="text" name="jogadores" id="jogador4">
+            <form onsubmit="validform(event)" id="form">
+                <fieldset id="num-jogadores">
+                    <legend>Número de jogadores</legend>
+                    <input type="radio" name="num-jogadores" id="i4jogadores">
+                    <input type="radio" name="num-jogadores" id="i3jogadores">
+                    <input type="radio" name="num-jogadores" id="i2jogadores">
                 </fieldset>
-                <input type="submit" value="Pronto">
-                <input type="reset" value="Limpar">
+                <fieldset id="nome-jogadores" class="hide">
+                    <legend>Nome dos jogadores</legend>
+                    <input type="text" name="jogadores" id="jogador1" pattern="^[a-zA-Z]{3,12}$">
+                    <input type="text" name="jogadores" id="jogador2" pattern="^[a-zA-Z]{3,12}$">
+                    <input type="text" name="jogadores" id="jogador3" pattern="^[a-zA-Z]{3,12}$">
+                    <input type="text" name="jogadores" id="jogador4" pattern="^[a-zA-Z]{3,12}$">
+                </fieldset>
+                <div id="form-buttons" class="hide">
+                    <input type="submit" value="Pronto" id="submit">
+                    <input type="reset" value="Limpar" id="clear">
+                </div>
             </form>
+            <table class="hide">
+                <thead>
+                    <tr>
+                        <th>Jogador1</th>
+                        <th>Jogador2</th>
+                        <th>Jogador3</th>
+                        <th>Jogador4</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" name="pontos" id="pontosj1" pattern="^\d+$"></td>
+                        <td><input type="number" name="pontos" id="pontosj2" pattern="^\d+$"></td>
+                        <td><input type="number" name="pontos" id="pontosj3" pattern="^\d+$"></td>
+                        <td><input type="number" name="pontos" id="pontosj4" pattern="^\d+$"></td>
+                    </tr>
+                </tbody>
+            </table>     
         </section>
     </main>
+    <script src="scripts/pratica3.js"></script>
 </body>
 </html>

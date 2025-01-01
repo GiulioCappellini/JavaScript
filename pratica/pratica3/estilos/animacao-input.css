@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+#num-jogadores input:checked::after {color: white;}
+
+#num-jogadores input::before {
+    content: "";
+    width: 25px;
+    height: 25px;
+    border: 3px solid white;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+#num-jogadores input:checked::before {
+    background-color: rgb(13, 13, 207);
+    animation: click 0.2s forwards ease-in-out;
+}
+@keyframes click {
+    0% {width: 0px; height: 0px;}
+    100% {width: 25px; height: 25px;}
+}
+
+#num-jogadores input:not(:checked)::before {animation: notclick 0.2s forwards ease-in-out;}
+@keyframes notclick {
+    0% {width: 25px; height: 25px; background-color: rgb(13, 13, 207);}
+    100% {width: 0px; height: 0px; background-color: rgb(13, 13, 207);}
+}
