@@ -28,3 +28,24 @@
     0% {width: 25px; height: 25px; background-color: rgb(13, 13, 207);}
     100% {width: 0px; height: 0px; background-color: rgb(13, 13, 207);}
 }
+
+
+.start::before {
+    animation: rotate 5s linear infinite;
+}
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.vanish {animation: vanish 0.8s ease-in-out forwards;}
+@keyframes vanish {
+    90% {
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(-125px);
+        opacity: 0;
+    }
+}

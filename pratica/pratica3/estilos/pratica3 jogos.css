@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    --shadow: 0px 0px 8px rgba(0, 0, 0, 0.522);
+}
+
 body {
     height: 100vh;
     background: url(../imagens/fundo\ jogos.jpg) center center no-repeat;
@@ -20,6 +24,7 @@ h1 {
     font-size: 2.5em;
     padding-top: 22px;
     padding-bottom: 16px;
+    text-shadow: 1px 1px 4px black;
 }
 
 form {
@@ -39,6 +44,7 @@ fieldset#num-jogadores {
     font-size: 1.3em;
     display: flex;
     justify-content: space-evenly;
+    text-shadow: 1px 1px 4px black;
 }
 
 #num-jogadores input {
@@ -48,8 +54,15 @@ fieldset#num-jogadores {
     width: 25px;
     height: 25px;
     border: 14px solid white;
+    box-shadow: var(--shadow);
     border-radius: 50%;
     position: relative;
+    cursor: pointer;
+    transition: transform 0.18s ease-in-out;
+}
+
+#num-jogadores input:hover {
+    transform: scale(110%);
 }
 
 #i4jogadores::after {
@@ -80,13 +93,54 @@ fieldset#num-jogadores {
 #form-buttons {
     width: 100%;
     text-align: center;
+    position: relative;
 }
 
-#submit, #clear {
-    width: 20%;
-    margin-top: 5px;
+#nome-jogadores input {
+    height: 32px;
+    border-radius: 12px;
+    text-align: center;
+    border: none;
+    box-shadow: var(--shadow);
+    margin-bottom: 5px;
 }
 
-.hide {
-    display: none;
+.start {
+    width: 160px;
+    border-radius: 20px;
+    border: none;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.18s ease-in-out;
+    cursor: pointer;
 }
+
+.start::before {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-image: linear-gradient(rgb(0, 229, 255), rgb(0, 229, 255), blue, blue);
+    border-radius: inherit;
+}
+.start::after {
+    content: "PRONTO";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: calc(100% - 7px);
+    height: calc(100% - 7px);
+    background-color: white;
+    border-radius: inherit;
+}
+
+.start:hover {
+    transform: scale(106%);
+}
+
+.hide {display: none;}
