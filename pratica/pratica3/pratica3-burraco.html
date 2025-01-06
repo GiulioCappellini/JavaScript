@@ -8,7 +8,7 @@
     <title>Burraco</title>
 </head>
 <body class="loading">
-    <h1>
+    <h1 id="title">
         Criando partida
     </h1>
     <main>
@@ -21,16 +21,21 @@
                     <input type="radio" name="num-jogadores" id="i2jogadores" value="2" onclick="showplayers()">
                 </fieldset>
                 <fieldset id="nome-jogadores">
-                    <legend class="hide">Nome dos jogadores</legend>
                     <input type="text" name="jogadores" id="jogador1" class="hide" pattern="^[a-zA-Z]{3,12}$" placeholder="Jogador 1">
                     <input type="text" name="jogadores" id="jogador2" class="hide" pattern="^[a-zA-Z]{3,12}$" placeholder="Jogador 2">
                     <input type="text" name="jogadores" id="jogador3" class="hide" pattern="^[a-zA-Z]{3,12}$" placeholder="Jogador 3">
                     <input type="text" name="jogadores" id="jogador4" class="hide" pattern="^[a-zA-Z]{3,12}$" placeholder="Jogador 4">
                 </fieldset>
-                <div ontouchstart="" id="div-start" class="hide">
+                <div id="container-button">
                     <button class="start" onclick="start(event)"></button>
                 </div>
             </form>
+            <div class="container-cards hid">
+                <div class="card hide" id="card1"><h2 class="nome-player"></h2><p class="points"></p><input type="number" name="pontos" id="ponto-p1" class="input-pontos" required placeholder="pontos" pattern="[0-9]"></div>
+                <div class="card hide" id="card2"><h2 class="nome-player"></h2><p class="points"></p><input type="number" name="pontos" id="ponto-p2" class="input-pontos" required placeholder="pontos" pattern="[0-9]"></div>
+                <div class="card hide" id="card3"><h2 class="nome-player"></h2><p class="points"></p><input type="number" name="pontos" id="ponto-p3" class="input-pontos" required placeholder="pontos" pattern="[0-9]"></div>
+                <div class="card hide" id="card4"><h2 class="nome-player"></h2><p class="points"></p><input type="number" name="pontos" id="ponto-p4" class="input-pontos" required placeholder="pontos" pattern="[0-9]"></div>
+            </div>
         </section>
     </main>
     <script src="scripts/pratica3.js"></script>

@@ -29,7 +29,6 @@
     100% {width: 0px; height: 0px; background-color: rgb(13, 13, 207);}
 }
 
-
 .start::before {
     animation: rotate 5s linear infinite;
 }
@@ -39,13 +38,32 @@
     }
 }
 
-.vanish {animation: vanish 0.8s ease-in-out forwards;}
+
+
+.vanish {animation: vanish 0.5s ease-in-out forwards;}
 @keyframes vanish {
-    90% {
-        opacity: 0;
-    }
+    70% {opacity: 0;}
+    100% {opacity: 0; display: none;}
+}
+
+
+.appear-cards {animation: appear-cards 0.6s ease-in-out forwards;}
+@keyframes appear-cards {
+    100% {top: 15%;}
+}
+
+
+
+.winner {
+    animation: win 0.9s ease-in-out forwards;
+    border-color: yellow;
+}
+@keyframes win {
     100% {
-        transform: translateY(-125px);
-        opacity: 0;
+        width: 90%;
+        height: 90%;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
 }
