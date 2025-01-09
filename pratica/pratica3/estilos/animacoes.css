@@ -52,18 +52,8 @@
     100% {top: 15%;}
 }
 
-
-
-.winner {
-    animation: win 0.9s ease-in-out forwards;
-    border-color: yellow;
-}
-@keyframes win {
-    100% {
-        width: 90%;
-        height: 90%;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
+@keyframes winner-appear {
+    0% {opacity: 0;}
+    70% {opacity: 0;}
+    100% {opacity: 1;}
 }
