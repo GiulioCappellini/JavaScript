@@ -12,6 +12,8 @@
     <h1 id="title">
         Criando partida
     </h1>
+    <div class="container-back hide">
+    </div>
     <main>
         <section>
             <form id="form">
@@ -32,10 +34,60 @@
                 </div>
             </form>
             <div class="container-cards">
-                <div class="card hide" id="card1"><h2 class="nome-player"></h2><p class="points"></p><input type="number" name="pontos" id="ponto-p1" class="input-pontos" required placeholder="pontos" pattern="[0-9]"></div>
-                <div class="card hide" id="card2"><h2 class="nome-player"></h2><p class="points"></p><input type="number" name="pontos" id="ponto-p2" class="input-pontos" required placeholder="pontos" pattern="[0-9]"></div>
-                <div class="card hide" id="card3"><h2 class="nome-player"></h2><p class="points"></p><input type="number" name="pontos" id="ponto-p3" class="input-pontos" required placeholder="pontos" pattern="[0-9]"></div>
-                <div class="card hide" id="card4"><h2 class="nome-player"></h2><p class="points"></p><input type="number" name="pontos" id="ponto-p4" class="input-pontos" required placeholder="pontos" pattern="[0-9]"></div>
+                <div class="card hide" id="card1">
+                    <h2 class="nome-player"></h2>
+                    <p class="points"></p>
+                    <span class="inps1">
+                        <div class="container-in">
+                            <span class="pay"></span>
+                            <input type="number" name="pontos" id="pagar-p1" class="input-pontos" pattern="[0-9]">
+                        </div>
+                        <div class="container-in">
+                            <span class="burraco"></span>
+                            <input type="number" name="pontos" id="burraco-p1" class="input-pontos" pattern="[0-9]">
+                        </div>
+                        <div class="container-in">
+                            <span class="pontos"></span>
+                            <input type="text" name="pontos" id="ponto-p1" class="input-pontos" pattern="[0-9\-]">
+                        </div>
+                    </span>
+                </div>
+                <div class="card hide" id="card2">
+                    <h2 class="nome-player"></h2>
+                    <p class="points"></p>
+                    <span class="inps2">
+                        <div class="container-in">
+                            <span class="pay"></span>
+                            <input type="number" name="pontos" id="pagar-p2" class="input-pontos" pattern="[0-9]">
+                        </div>
+                        <div class="container-in">
+                            <span class="burraco"></span>
+                            <input type="number" name="pontos" id="burraco-p2" class="input-pontos" pattern="[0-9]">
+                        </div>
+                        <div class="container-in">
+                            <span class="pontos"></span>
+                            <input type="text" name="pontos" id="ponto-p2" class="input-pontos" pattern="[0-9\-]">
+                        </div>
+                    </span>
+                </div>
+                <div class="card hide" id="card3">
+                    <h2 class="nome-player"></h2>
+                    <p class="points"></p>
+                    <span class="inps3">
+                        <div class="container-in">
+                            <span class="pay"></span>
+                            <input type="number" name="pontos" id="pagar-p3" class="input-pontos" pattern="[0-9]">
+                        </div>
+                        <div class="container-in">
+                            <span class="burraco"></span>
+                            <input type="number" name="pontos" id="burraco-p3" class="input-pontos" pattern="[0-9]">
+                        </div>
+                        <div class="container-in">
+                            <span class="pontos"></span>
+                            <input type="text" name="pontos" id="ponto-p3" class="input-pontos" pattern="[0-9\-]">
+                        </div>
+                    </span>
+                </div>
             </div>
         </section>
     </main>

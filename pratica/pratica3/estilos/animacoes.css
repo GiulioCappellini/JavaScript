@@ -46,14 +46,53 @@
     100% {opacity: 0; display: none;}
 }
 
+.back-border {
+    cursor: pointer;
+    transform: translate(-5px, 430px);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid black;
+    background: white url(../imagens/back-arrow.png) no-repeat center center;
+    background-size: 20px;
+}
 
 .appear-cards {animation: appear-cards 0.6s ease-in-out forwards;}
 @keyframes appear-cards {
-    100% {top: 15%;}
+    100% {top: 115px;}
 }
 
 @keyframes winner-appear {
     0% {opacity: 0;}
     70% {opacity: 0;}
     100% {opacity: 1;}
+}
+
+.appear-back {animation: appear-back 0.3s ease-out forwards;}
+@keyframes appear-back {
+    0% {
+        left: 100%;
+    }
+    100% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.back-action {animation: back-action 0.38s ease-in-out;}
+@keyframes back-action {
+    0% {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    60% {
+        left: 0%;
+        top: 50%;
+        transform: translate(-100%, -50%);
+        opacity: 1;
+    }
+    61% {opacity: 0;}
+    62% {left: 100%; opacity: 1;}
 }
