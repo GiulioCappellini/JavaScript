@@ -6,6 +6,8 @@
     font-size: 1em;
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -moz-tap-highlight-color: transparent;
 }
 
 :root {
@@ -31,7 +33,7 @@ h1 {
 
 .container-back {
     width: 100%;
-    height: 60px;
+    height: 40px;
     position: relative;
 }
 
@@ -74,8 +76,8 @@ fieldset#num-jogadores {
     appearance: none;
     background-color: white;
     margin-top: 15px;
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
     border: 14px solid white;
     box-shadow: var(--shadow);
     border-radius: 50%;
@@ -179,12 +181,12 @@ fieldset#num-jogadores {
     overflow: hidden;
 }
 
-.card h2 {font-size: 1.2em;}
-
 .points {
     font-weight: bold;
     font-size: 2em;
-    margin-bottom: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-127%);
 }
 
 div.container-in {
@@ -238,9 +240,10 @@ span.pontos {
 }
 
 .nome-player {
+    font-size: 1.2em;
     color: black;
     padding-top: 2px;
-    line-height: 15px;
+    line-height: 18px;
 }
 
 .input-pontos {
@@ -251,8 +254,6 @@ span.pontos {
     margin-bottom: 5px;
     background-color: white;
 }
-
-
 
 /* Para navegadores modernos */
 .input-pontos {
