@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    vertical-align: baseline;
+    text-decoration: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    -moz-tap-highlight-color: transparent;
+}
+
+html {
+    height: 100%;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --fundo: white;
+    --buttons: rgb(30, 30, 30);
+    --inverted_buttons: rgb(225, 225, 225);
+    --border: black;
+    --inverted_border: white;
+}
+
+body {
+    width: 100vw;
+    height: 100dvh;
+    background-color: var(--fundo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    width: 320px;
+    height: 568px;
+}
+
+.container-calculator {
+    width: 320px;
+    margin: auto;
+    position: absolute;
+}
+
+.display {
+    background-color: transparent;
+    width: 95%;
+    height: 108.8px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.container-buttons {
+    height: 450px;
+    width: 98%;
+    margin: auto;
+    border-radius: 10px;
+    display: grid;
+    grid-template: repeat(6, 16%)/repeat(4, 25%);
+}
+
+.container-buttons * {
+    background-color: var(--buttons);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--border);
+    color: white;
+    font-size: 1.4em;
+}
+
+.container-buttons *:empty {
+    border-color: var(--inverted_border);
+    background-color: var(--inverted_buttons);
+    filter: invert(1);
+}
+
+.porcentagem {border-start-start-radius: 10px;}
+.delete {
+    grid-column-end: span 2;
+    background: url(../imagens/backspace.png) no-repeat center center;
+    background-size: 26%;
+    border-start-end-radius: 10px;
+}
+.raiz {
+    background: url(../imagens/raiz-quadrada.png) no-repeat center center;
+    background-size: 45%;
+}
+.divisao {
+    background: url(../imagens/division.png) no-repeat center center;
+    background-size: 45%;
+}
+.sinal {
+    background: url(../imagens/plus\ and\ minus.png) no-repeat center center;
+    background-size: 40%;
+    border-end-start-radius: 10px;
+}
+.igual {background-color: rgb(32, 32, 32); border-end-end-radius: 10px;}
+.menos, .mais, .virgula, .igual {font-size: 2em;}
+
+footer {
+    position: absolute;
+    left: 100%;
+    top: 100%;
+    transform: translate(-100%, -100%);
+    width: 100vw;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+}
