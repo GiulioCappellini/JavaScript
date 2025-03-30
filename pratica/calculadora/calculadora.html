@@ -13,32 +13,233 @@
             <div class="display">
             </div>
             <div class="container-buttons">
-                <div class="porcentagem">%</div>
-                <div class="clear">C</div>
-                <div class="delete"></div>
-                <div class="inverso">¹/x</div>
-                <div class="quadrado">x²</div>
-                <div class="raiz"></div>
-                <div class="divisao"></div>
-                <div class="num">7</div>
-                <div class="num">8</div>
-                <div class="num">9</div>
-                <div class="multiplicacao">X</div>
-                <div class="num">4</div>
-                <div class="num">5</div>
-                <div class="num">6</div>
-                <div class="menos">-</div>
-                <div class="num">1</div>
-                <div class="num">2</div>
-                <div class="num">3</div>
-                <div class="mais">+</div>
-                <div class="sinal"></div>
-                <div class="num">0</div>
-                <div class="virgula">,</div>
-                <div class="igual">=</div>
+                <button class="porcentagem operador" value="%">%</button>
+                <button class="clear" value="clear">C</button>
+                <button class="delete" value="Backspace"></button>
+                <button class="inverso operador" value="oneforx">¹/x</button>
+                <button class="quadrado operador" value="square">x²</button>
+                <button class="raiz operador" value="root"></button>
+                <button class="divisao operador" value="/"></button>
+                <button class="num" value="7">7</button>
+                <button class="num" value="8">8</button>
+                <button class="num" value="9">9</button>
+                <button class="multiplicacao operador" value="*">X</button>
+                <button class="num" value="4">4</button>
+                <button class="num" value="5">5</button>
+                <button class="num" value="6">6</button>
+                <button class="menos operador" value="-">-</button>
+                <button class="num" value="1">1</button>
+                <button class="num" value="2">2</button>
+                <button class="num" value="3">3</button>
+                <button class="mais operador" value="+">+</button>
+                <button class="sinal" value="signal"></button>
+                <button class="num" value="0">0</button>
+                <button class="virgula" value=",">,</button>
+                <button class="igual" value="Enter">=</button>
             </div>
         </div>
     </main>
-    <footer><p>Autoria de Giulio Cappellini</p></footer>
+
+    <script>
+        var buttons = document.querySelectorAll("button");
+        const display = document.querySelector(".display");
+        var displaynums = "";
+        var curentnum = "";
+        var inputnum = [];
+        var showresult = false;
+
+        document.addEventListener("keydown", function(event) {
+            updateDisplay();
+            let key = event.key;
+            let correspondingbt = document.querySelector(`.container-buttons > button[value='${key}']`);
+            if (correspondingbt) {
+                if (showresult) {
+                    inputnum = [];
+                    showresult = false;
+                    updateDisplay();
+                };
+                if ("1234567890".includes(key)) {curentnum += key};
+                if (key == "Enter") {
+                    correspondingbt.classList.add("js_iqual");
+                    setTimeout(() => {correspondingbt.classList.remove("js_iqual")}, 100);
+
+                    if (/\d/.test(curentnum)) {
+                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        inputnum.push(curentnum);
+                    };
+                    gocalc(inputnum);
+                    inputnum = [];
+                } else {
+                    correspondingbt.classList.add("js_button");
+                    setTimeout(() => {correspondingbt.classList.remove("js_button")}, 100);
+
+                    if (key == "," && !curentnum.toString().includes(",") && curentnum != "") {
+                        curentnum += key;
+                    } else if (correspondingbt.classList.contains("operador")) {
+                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        if (key == "oneforx") {
+                            if (curentnum != "") {
+                                curentnum = 1 / curentnum;
+                                inputnum.push(curentnum);
+                            } else {
+                                if (inputnum != "") {
+                                    let lastnum = inputnum.splice(-1);
+                                    let index = inputnum.indexOf(lastnum);
+                                    inputnum.splice(index, 1, 1/lastnum);
+                                };
+                            };
+                        } else if (key == "square") {
+                            if (curentnum != "") {
+                                curentnum = curentnum * curentnum;
+                                inputnum.push(curentnum);
+                            } else {
+                                if (inputnum != "") {
+                                    let lastnum = inputnum.splice(-1);
+                                    let index = inputnum.indexOf(lastnum);
+                                    inputnum.splice(index, 1, lastnum * lastnum);
+                                };
+                            };
+                        } else if (key == "root") {
+                            if (curentnum != "") {
+                                curentnum = Math.sqrt(curentnum);
+                                inputnum.push(curentnum);
+                            } else {
+                                if (inputnum != "") {
+                                    let lastnum = inputnum.splice(-1);
+                                    let index = inputnum.indexOf(lastnum);
+                                    inputnum.splice(index, 1, Math.sqrt(lastnum));
+                                };
+                            };
+                        } else {
+                            if (curentnum != "") {inputnum.push(curentnum)};
+                            inputnum.push(key);
+                        };
+                        curentnum = "";
+                    } else if (key == "Backspace") {
+                        if (curentnum > 0) {curentnum = curentnum.slice(0, -1)};
+                    } else if (key == "signal") {
+                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        curentnum = curentnum - (curentnum*2);
+                    } else if (key == "clear") {
+                        curentnum = "";
+                        inputnum = [];
+                    };
+                };
+                updateDisplay();
+            };
+        });
+        buttons.forEach(bt => {bt.addEventListener("click", function() {
+            updateDisplay();
+            let key = bt.value;
+            let correspondingbt = document.querySelector(`.container-buttons > button[value='${key}']`)
+            
+            if (correspondingbt) {
+                if (showresult) {
+                    inputnum = [];
+                    showresult = false;
+                    updateDisplay();
+                };
+                if ("1234567890".includes(key)) {curentnum += key};
+                if (key == "Enter") {
+                    correspondingbt.classList.add("js_iqual");
+                    setTimeout(() => {correspondingbt.classList.remove("js_iqual")}, 100);
+
+                    if (/\d/.test(curentnum)) {
+                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        inputnum.push(curentnum);
+                    };
+                    gocalc(inputnum);
+                    inputnum = [];
+                } else {
+                    correspondingbt.classList.add("js_button");
+                    setTimeout(() => {correspondingbt.classList.remove("js_button")}, 100);
+
+                    if (key == "," && !curentnum.toString().includes(",") && curentnum != "") {
+                        curentnum += key;
+                    } else if (correspondingbt.classList.contains("operador")) {
+                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        if (key == "oneforx") {
+                            if (curentnum != "") {
+                                curentnum = 1 / curentnum;
+                                inputnum.push(curentnum);
+                            } else {
+                                if (inputnum != "") {
+                                    let lastnum = inputnum.splice(-1);
+                                    let index = inputnum.indexOf(lastnum);
+                                    inputnum.splice(index, 1, 1/lastnum);
+                                };
+                            };
+                        } else if (key == "square") {
+                            if (curentnum != "") {
+                                curentnum = curentnum * curentnum;
+                                inputnum.push(curentnum);
+                            } else {
+                                if (inputnum != "") {
+                                    let lastnum = inputnum.splice(-1);
+                                    let index = inputnum.indexOf(lastnum);
+                                    inputnum.splice(index, 1, lastnum * lastnum);
+                                };
+                            };
+                        } else if (key == "root") {
+                            if (curentnum != "") {
+                                curentnum = Math.sqrt(curentnum);
+                                inputnum.push(curentnum);
+                            } else {
+                                if (inputnum != "") {
+                                    let lastnum = inputnum.splice(-1);
+                                    let index = inputnum.indexOf(lastnum);
+                                    inputnum.splice(index, 1, Math.sqrt(lastnum));
+                                };
+                            };
+                        } else {
+                            if (inputnum.length > 0 && "+-/*%".includes(inputnum[inputnum.length -1])) {return};
+                            if (curentnum != "") {inputnum.push(curentnum)};
+                            inputnum.push(key);
+                        };
+                        curentnum = "";
+                    } else if (key == "Backspace") {
+                        if (curentnum > 0) {curentnum = curentnum.slice(0, -1)};
+                    } else if (key == "signal") {
+                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        curentnum = curentnum - (curentnum*2);
+                    } else if (key == "clear") {
+                        curentnum = "";
+                        inputnum = [];
+                    };
+                };
+                updateDisplay();
+                console.log(curentnum, inputnum)
+            };
+        })});
+
+        function gocalc(inputnum) {
+            showresult = true;
+            inputnum.forEach((item, index, arr) => {
+                if (item === "%") {
+                    let n = arr[index-1];
+                    let d = arr[index+1];
+                    arr.splice(index-1, index+2, n*(d/100))
+                };
+            });
+            inputnum = inputnum.join(' ');
+            inputnum = inputnum.replace(/,/g, ".");
+            if (!/\d$/.test(inputnum)) {inputnum = inputnum.slice(0, -1);};
+            result = eval(inputnum);
+            curentnum = result.toString();
+            updateDisplay();
+        };
+        function updateDisplay() {
+            if (inputnum.length === 0) {
+                display.innerText = curentnum;
+            } else {
+                let lastItem = inputnum[inputnum.length - 1];
+                if ("+-*/%".includes(lastItem)) {
+                    display.innerText = inputnum.join(" ") + " " + curentnum;
+                } else {
+                    display.innerText = inputnum.join(" ") + (curentnum ? " " + curentnum : "");
+                };
+            };
+        };
+    </script>
 </body>
 </html>
