@@ -34,7 +34,7 @@
                 <button class="mais operador" value="+">+</button>
                 <button class="sinal" value="signal"></button>
                 <button class="num" value="0">0</button>
-                <button class="virgula" value=",">,</button>
+                <button class="virgula" value=".">.</button>
                 <button class="igual" value="Enter">=</button>
             </div>
         </div>
@@ -43,28 +43,29 @@
     <script>
         var buttons = document.querySelectorAll("button");
         const display = document.querySelector(".display");
-        var displaynums = "";
         var curentnum = "";
         var inputnum = [];
         var showresult = false;
+        var cannum = true;
 
         document.addEventListener("keydown", function(event) {
             updateDisplay();
             let key = event.key;
             let correspondingbt = document.querySelector(`.container-buttons > button[value='${key}']`);
+            
             if (correspondingbt) {
                 if (showresult) {
                     inputnum = [];
                     showresult = false;
                     updateDisplay();
                 };
-                if ("1234567890".includes(key)) {curentnum += key};
+                if ("1234567890".includes(key) && cannum == true) {curentnum += key};
                 if (key == "Enter") {
                     correspondingbt.classList.add("js_iqual");
                     setTimeout(() => {correspondingbt.classList.remove("js_iqual")}, 100);
 
                     if (/\d/.test(curentnum)) {
-                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        if (curentnum.toString().includes(".") && !curentnum.toString().split(".")[1]) {curentnum = curentnum.slice(0, -1)};
                         inputnum.push(curentnum);
                     };
                     gocalc(inputnum);
@@ -73,11 +74,13 @@
                     correspondingbt.classList.add("js_button");
                     setTimeout(() => {correspondingbt.classList.remove("js_button")}, 100);
 
-                    if (key == "," && !curentnum.toString().includes(",") && curentnum != "") {
+                    if (key == "." && !curentnum.toString().includes(".") && curentnum != "") {
                         curentnum += key;
                     } else if (correspondingbt.classList.contains("operador")) {
-                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        if (curentnum.toString().includes(".") && !curentnum.toString().split(".")[1]) {curentnum = curentnum.slice(0, -1)};
                         if (key == "oneforx") {
+                            if (!/\d/.test(inputnum[inputnum.length -1]) && curentnum == "") {return};
+                            cannum = false;
                             if (curentnum != "") {
                                 curentnum = 1 / curentnum;
                                 inputnum.push(curentnum);
@@ -86,9 +89,11 @@
                                     let lastnum = inputnum.splice(-1);
                                     let index = inputnum.indexOf(lastnum);
                                     inputnum.splice(index, 1, 1/lastnum);
-                                };
+                                } else {cannum = true};
                             };
                         } else if (key == "square") {
+                            if (!/\d/.test(inputnum[inputnum.length -1]) && curentnum == "") {return};
+                            cannum = false;
                             if (curentnum != "") {
                                 curentnum = curentnum * curentnum;
                                 inputnum.push(curentnum);
@@ -97,9 +102,11 @@
                                     let lastnum = inputnum.splice(-1);
                                     let index = inputnum.indexOf(lastnum);
                                     inputnum.splice(index, 1, lastnum * lastnum);
-                                };
+                                } else {cannum = true};
                             };
                         } else if (key == "root") {
+                            if (!/\d/.test(inputnum[inputnum.length -1]) && curentnum == "") {return};
+                            cannum = false;
                             if (curentnum != "") {
                                 curentnum = Math.sqrt(curentnum);
                                 inputnum.push(curentnum);
@@ -108,19 +115,26 @@
                                     let lastnum = inputnum.splice(-1);
                                     let index = inputnum.indexOf(lastnum);
                                     inputnum.splice(index, 1, Math.sqrt(lastnum));
-                                };
+                                } else {cannum = true};
                             };
                         } else {
-                            if (curentnum != "") {inputnum.push(curentnum)};
+                            cannum = true;
+                            if (curentnum != "") {inputnum.push(curentnum)}
+                            else if (inputnum.length > 0 && "+-/*%".includes(inputnum[inputnum.length -1])) {
+                                if (key == inputnum[inputnum.length -1]) {return}
+                                else {inputnum.splice(-1, 1)};
+                            };
                             inputnum.push(key);
+                            
                         };
                         curentnum = "";
                     } else if (key == "Backspace") {
                         if (curentnum > 0) {curentnum = curentnum.slice(0, -1)};
                     } else if (key == "signal") {
-                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        if (curentnum.toString().includes(".") && !curentnum.toString().split(".")[1]) {return};
                         curentnum = curentnum - (curentnum*2);
                     } else if (key == "clear") {
+                        cannum = true;
                         curentnum = "";
                         inputnum = [];
                     };
@@ -139,13 +153,13 @@
                     showresult = false;
                     updateDisplay();
                 };
-                if ("1234567890".includes(key)) {curentnum += key};
+                if ("1234567890".includes(key) && cannum == true) {curentnum += key};
                 if (key == "Enter") {
                     correspondingbt.classList.add("js_iqual");
                     setTimeout(() => {correspondingbt.classList.remove("js_iqual")}, 100);
 
                     if (/\d/.test(curentnum)) {
-                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        if (curentnum.toString().includes(".") && !curentnum.toString().split(".")[1]) {curentnum = curentnum.slice(0, -1)};
                         inputnum.push(curentnum);
                     };
                     gocalc(inputnum);
@@ -154,11 +168,13 @@
                     correspondingbt.classList.add("js_button");
                     setTimeout(() => {correspondingbt.classList.remove("js_button")}, 100);
 
-                    if (key == "," && !curentnum.toString().includes(",") && curentnum != "") {
+                    if (key == "." && !curentnum.toString().includes(".") && curentnum != "") {
                         curentnum += key;
                     } else if (correspondingbt.classList.contains("operador")) {
-                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        if (curentnum.toString().includes(".") && !curentnum.toString().split(".")[1]) {curentnum = curentnum.slice(0, -1)};
                         if (key == "oneforx") {
+                            if (!/\d/.test(inputnum[inputnum.length -1]) && curentnum == "") {return};
+                            cannum = false;
                             if (curentnum != "") {
                                 curentnum = 1 / curentnum;
                                 inputnum.push(curentnum);
@@ -167,9 +183,11 @@
                                     let lastnum = inputnum.splice(-1);
                                     let index = inputnum.indexOf(lastnum);
                                     inputnum.splice(index, 1, 1/lastnum);
-                                };
+                                } else {cannum = true};
                             };
                         } else if (key == "square") {
+                            if (!/\d/.test(inputnum[inputnum.length -1]) && curentnum == "") {return};
+                            cannum = false;
                             if (curentnum != "") {
                                 curentnum = curentnum * curentnum;
                                 inputnum.push(curentnum);
@@ -178,9 +196,11 @@
                                     let lastnum = inputnum.splice(-1);
                                     let index = inputnum.indexOf(lastnum);
                                     inputnum.splice(index, 1, lastnum * lastnum);
-                                };
+                                } else {cannum = true};
                             };
                         } else if (key == "root") {
+                            if (!/\d/.test(inputnum[inputnum.length -1]) && curentnum == "") {return};
+                            cannum = false;
                             if (curentnum != "") {
                                 curentnum = Math.sqrt(curentnum);
                                 inputnum.push(curentnum);
@@ -189,26 +209,31 @@
                                     let lastnum = inputnum.splice(-1);
                                     let index = inputnum.indexOf(lastnum);
                                     inputnum.splice(index, 1, Math.sqrt(lastnum));
-                                };
+                                } else {cannum = true};
                             };
                         } else {
-                            if (inputnum.length > 0 && "+-/*%".includes(inputnum[inputnum.length -1])) {return};
-                            if (curentnum != "") {inputnum.push(curentnum)};
+                            cannum = true;
+                            if (curentnum != "") {inputnum.push(curentnum)}
+                            else if (inputnum.length > 0 && "+-/*%".includes(inputnum[inputnum.length -1])) {
+                                if (key == inputnum[inputnum.length -1]) {return}
+                                else {inputnum.splice(-1, 1)};
+                            };
                             inputnum.push(key);
+                            
                         };
                         curentnum = "";
                     } else if (key == "Backspace") {
                         if (curentnum > 0) {curentnum = curentnum.slice(0, -1)};
                     } else if (key == "signal") {
-                        if (curentnum.toString().includes(",") && !curentnum.toString().split(",")[1]) {curentnum = curentnum.slice(0, -1)};
+                        if (curentnum.toString().includes(".") && !curentnum.toString().split(".")[1]) {return};
                         curentnum = curentnum - (curentnum*2);
                     } else if (key == "clear") {
+                        cannum = true;
                         curentnum = "";
                         inputnum = [];
                     };
                 };
                 updateDisplay();
-                console.log(curentnum, inputnum)
             };
         })});
 
@@ -222,7 +247,6 @@
                 };
             });
             inputnum = inputnum.join(' ');
-            inputnum = inputnum.replace(/,/g, ".");
             if (!/\d$/.test(inputnum)) {inputnum = inputnum.slice(0, -1);};
             result = eval(inputnum);
             curentnum = result.toString();
