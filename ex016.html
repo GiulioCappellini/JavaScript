@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 16</title>
+    <style>
+        @charset "UTF-8";
+        
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            vertical-align: baseline;
+            text-decoration: none;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
+            -moz-tap-highlight-color: transparent;
+        }
+        html {
+            height: 100%;
+            font-size: 1em;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3em;
+        }
+
+        body {
+            width: 100vw;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(44, 44, 44);
+        }
+
+        main {
+            width: 50%;
+            height: 70%;
+            background-color: whitesmoke;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            gap: 100px;
+            padding: 20px;
+        }
+
+        input {all: unset;}
+        input[type="number"] {
+            border: 1px solid black;
+            border-radius: 3px;
+            width: 40px;
+            height: 20px;
+        }
+        input[type="button"] {
+            border-radius: 20px;
+            background-color: blue;
+            color: white;
+            width: calc(5ch + 30px);
+            text-align: center;
+        }
+
+        .display {
+            border: 1px solid black;
+            border-radius: 20px;
+            padding: 10px;
+            width: 90%;
+            height: 100px;
+            margin: auto;
+            text-align: center;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lets count!</h1>
+    <main>
+        <section class="container">
+            <span class="inputs">
+                <label for="nstart">Start number: </label>
+                <input type="number" name="number" id="nstart">
+            </span>
+            <span class="inputs">
+                <label for="nend">End number: </label>
+                <input type="number" name="number" id="nend">
+            </span>
+            <span class="inputs">
+                <label for="ninterval">Interval: </label>
+                <input type="number" name="number" id="ninterval">
+            </span>
+            <input type="button" value="Count" onclick=gocount()>
+            <div class="display"></div>
+        </section>
+    </main>
+
+    <script>
+        const display = document.querySelector(".display");
+        
+        function gocount() {
+            const startnum = parseInt(document.querySelector("#nstart").value);
+            const endnum = parseInt(document.querySelector("#nend").value);
+            let intervalnum = document.querySelector("#ninterval").value;
+            let count = "";
+
+            if (intervalnum == "") {intervalnum = 1};
+            intervalnum = parseInt(intervalnum);
+            
+            if (startnum < endnum && intervalnum < endnum) {
+                for (let n=startnum; n<=endnum; n+=intervalnum) {
+                    count+=n;
+                    if (n + intervalnum <= endnum) {count+=" → "};
+                };
+            } else if (startnum > endnum && intervalnum < startnum) {
+                for (let n=startnum; n>=endnum; n-=intervalnum) {
+                    count+=n;
+                    if (n - intervalnum >= endnum) {count+=" → "};
+                };
+            } else {window.alert("ERRO!")};
+
+            display.innerText=count;
+        };
+    </script>
+</body>
+</html>

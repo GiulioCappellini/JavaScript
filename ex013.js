@@ -31,4 +31,4 @@ switch (day) {
     case 6:
         console.log("Sabado")
         break
-}
+};

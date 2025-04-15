@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex17</title>
+    <style>
+        @charset "UTF-8";
+        
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            vertical-align: baseline;
+            text-decoration: none;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
+            -moz-tap-highlight-color: transparent;
+        }
+        html {
+            height: 100%;
+            font-size: 1em;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body {
+            width: 100vw;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        main {
+            padding: 30px;
+            width: 40vw;
+            height: 50dvh;
+            border-radius: 20px;
+            background-color: rgb(26, 26, 26);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            gap: 20px;
+            box-shadow: 4px 4px 1px rgb(50, 50, 50);
+        }
+
+        input[type="number"] {
+            border: none;
+            border-radius: 20px;
+            height: calc(2ch + 6px);
+            padding-left: 8px;
+        }
+
+        input[type="button"] {
+            width: 130px;
+            height: 30px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: font-size 0.1s ease-in-out;
+            font-weight: bold;
+        }
+        input[type="button"]:hover {font-size: 1.2em;}
+        input[type="button"]:active {font-size: 0.8em;}
+
+        
+
+        .display {
+            border-radius: 20px;
+            background-color: white;
+            color: black;
+            margin: auto;
+            text-align: center;
+            font-weight: bold;
+            width: 200px;
+            height: 252px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .display::before {
+            z-index: -1;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            content: "";
+            width: 202px;
+            height: 254px;
+            border-radius: inherit;
+            border-top: 4px solid rgb(50, 50, 50);
+            border-left: 4px solid rgb(50, 50, 50);
+        }
+    </style>
+</head>
+<body>
+    <h1>Generate Multiplication Table</h1>
+    <main>
+        <span>
+            <label for="number">Number: </label>
+            <input type="number" name="num" id="number">
+        </span>
+        <input type="button" value="Generate" onclick=generate()>
+        <div class="display"></div>
+    </main>
+
+    <script>
+        const display = document.querySelector(".display");
+
+        function generate() {
+            const number = parseInt(document.querySelector("#number").value);
+
+            if (!/\d/.test(number)) {window.alert("A number is required!")}
+            else {
+                if (display.innerHTML != "") {display.innerHTML = ""};
+                for (let n = 1; n <= 10; n++) {
+                    display.innerHTML += `${number} X ${n} = ${number*n} <br>`;
+                };
+            };
+        };
+    </script>
+</body>
+</html>

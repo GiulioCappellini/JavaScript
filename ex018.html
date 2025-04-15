@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numbers</title>
+    <style>
+        @charset "UTF-8";
+        
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            vertical-align: baseline;
+            text-decoration: none;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
+            -moz-tap-highlight-color: transparent;
+        }
+        html {
+            height: 100%;
+            font-size: 1em;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: rgb(27, 27, 27);
+            width: 100vw;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+        }
+
+        h1 {
+            color: whitesmoke;
+        }
+
+        main {
+            width: 60vw;
+            border: 2px solid black;
+            border-radius: 20px;
+            background-color: whitesmoke;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: 30fr 66fr;
+            grid-template-rows: 18fr 78fr;
+            padding: 20px;
+        }
+
+        .numbers {
+            grid-row-start: 1;
+            grid-column-start: 1;
+            grid-column-end: 5;
+        }
+
+        input {
+            border: 1px solid black;
+            border-radius: 20px;
+            height: 30px;
+            text-align: center;
+        }
+        input[type="number"] {width: 200px;}
+        input[type="button"] {width: 150px; font-weight: bold;}
+        input[type="button"]:hover {background-color: rgb(219, 219, 219);}
+        input[type="button"]:active {background-color: white;}
+
+        .display {
+            min-width: 230px;
+            height: 260px;
+            margin: 30px;
+            padding-block: 10px;
+            border-radius: 20px;
+            border: 2px solid black;
+            color: black;
+            text-align: center;
+            overflow-y: scroll;
+        }
+        .display::-webkit-scrollbar {height: auto; width: 4px;}
+        .display::-webkit-scrollbar-thumb {background-color: rgb(49, 49, 49); border-radius: 100px;}
+        .display p {border: none; margin: 0px;}
+
+        .display_tot10 {border-start-end-radius: 0px; border-end-end-radius: 0px;}
+
+        .analyse {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            grid-column-start: 1;
+            grid-row-start: 2;
+        }
+
+        p {
+            border: 2px solid black;
+            width: auto;
+            height: auto;
+            border-radius: 20px;
+            grid-column-start: 2;
+            grid-row-start: 2;
+            margin: 20px;
+        }
+
+        .analysed {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Analisator of Numbers</h1>
+    <main>
+        <section>
+            <span class="numbers">
+                <label for="number">Select a number between 1 and 100: </label>
+                <input type="number" name="num" id="number"> 
+                <input type="button" value="Add" onclick="add()">
+            </span>
+            <span class="analyse">
+                <div class="display"><p></p></div>
+                <input type="button" value="Analyse" onclick="go()">
+            </span>
+            <p class="analysed"></p>
+        </section>
+    </main>
+
+    <script>
+        const display = document.querySelector(".display p");
+        const anlysed = document.querySelector(".analysed");
+        const number = document.querySelector("#number");
+        const analysed = document.querySelector(".analysed");
+        var tot = [];
+
+        function add() {
+            let n = parseInt(number.value);
+            
+            if (n < 1 || n > 100 || !n) {window.alert("The number must be within the established range!"); return;}
+            else {
+                tot.push(n);
+                display.innerHTML += `Número ${n} adicionado! <br>`;
+                number.value="";
+            };
+
+            if (tot.length >= 10) {document.querySelector(".display").classList.add("display_tot10")}
+            else {if (document.querySelector(".display").classList.contains("display_tot10")) {document.querySelector(".display").classList.remove("display_tot10")}};
+
+            if (analysed.innerHTML != "") {analysed.innerHTML = ""};
+        };
+
+        function go() {
+            tot = tot.map(n => Number(n));
+            tot = tot.sort((a, b) => a - b);
+
+            let sum = tot.reduce((acc, val) => acc + val, 0);
+            let average = sum / tot.length;
+
+            analysed.innerHTML = `- Ao todo tem ${tot.length} números! <br>
+                                - O menor número é ${tot[0]}! <br>
+                                - O maior número é ${tot[tot.length -1]}! <br>
+                                - A soma dos números é ${sum}! <br>
+                                - A média dos números é ${average.toFixed(2)}!`;
+
+            display.innerHTML = "";
+            tot = [];
+            document.querySelector(".display").classList.remove("display_tot10");
+        };
+    </script>
+</body>
+</html>
